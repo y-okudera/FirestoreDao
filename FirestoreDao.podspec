@@ -11,6 +11,7 @@ It is wrapper library for easy use of firestore.
   s.author           = { 'YukiOkudera' => 'appledev.yuoku@gmail.com' }
   s.source           = { :git => 'https://github.com/y-okudera/FirestoreDao.git', :tag => s.version.to_s }
 
+  s.swift_version = '5.1'
   s.ios.deployment_target = '11.0'
   s.source_files = 'FirestoreDao/Classes/*.swift'
   s.static_framework = true
