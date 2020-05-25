@@ -14,21 +14,21 @@ public protocol FirestoreDaoDelegate: AnyObject {
 
     // Access a specific document.
 
-    func firestoreDao(_ firestoreDao: FirestoreDao<Self>, creationResult: Swift.Result<Void, FirestoreDaoWriteError>)
+    func firestoreDao(creationResult: Swift.Result<Void, FirestoreDaoWriteError>)
 
-    func firestoreDao(_ firestoreDao: FirestoreDao<Self>, updatingResult: Swift.Result<Void, FirestoreDaoWriteError>)
+    func firestoreDao(updatingResult: Swift.Result<Void, FirestoreDaoWriteError>)
 
-    func firestoreDao(_ firestoreDao: FirestoreDao<Self>, fetchingResult: Swift.Result<Model, FirestoreDaoFetchError>)
+    func firestoreDao(fetchingResult: Swift.Result<Model, FirestoreDaoFetchError>)
 
-    func firestoreDao(_ firestoreDao: FirestoreDao<Self>, deletionResult: Swift.Result<Void, FirestoreDaoWriteError>)
+    func firestoreDao(deletionResult: Swift.Result<Void, FirestoreDaoWriteError>)
 
     // Access multiple documents.
 
-    func firestoreDao(_ firestoreDao: FirestoreDao<Self>, allDocumentsFetchingResult: Swift.Result<[Model], FirestoreDaoFetchError>)
+    func firestoreDao(allDocumentsFetchingResult: Swift.Result<[Model], FirestoreDaoFetchError>)
 
-    func firestoreDao(_ firestoreDao: FirestoreDao<Self>, documentsFetchingResult: Swift.Result<[Model], FirestoreDaoFetchError>)
+    func firestoreDao(documentsFetchingResult: Swift.Result<[Model], FirestoreDaoFetchError>)
 
-    func firestoreDao(_ firestoreDao: FirestoreDao<Self>, batchWritingResult: Swift.Result<Void, FirestoreDaoWriteError>)
+    func firestoreDao(batchWritingResult: Swift.Result<Void, FirestoreDaoWriteError>)
 }
 
 // MARK: - Default impl
@@ -36,19 +36,19 @@ public extension FirestoreDaoDelegate {
 
     // Access a specific document.
 
-    func firestoreDao(_ firestoreDao: FirestoreDao<Self>, creationResult: Swift.Result<Void, FirestoreDaoWriteError>) {}
+    func firestoreDao(creationResult: Swift.Result<Void, FirestoreDaoWriteError>) {}
 
-    func firestoreDao(_ firestoreDao: FirestoreDao<Self>, updatingResult: Swift.Result<Void, FirestoreDaoWriteError>) {}
+    func firestoreDao(updatingResult: Swift.Result<Void, FirestoreDaoWriteError>) {}
 
-    func firestoreDao(_ firestoreDao: FirestoreDao<Self>, fetchingResult: Swift.Result<Model, FirestoreDaoFetchError>) {}
+    func firestoreDao(fetchingResult: Swift.Result<Model, FirestoreDaoFetchError>) {}
 
-    func firestoreDao(_ firestoreDao: FirestoreDao<Self>, deletionResult: Swift.Result<Void, FirestoreDaoWriteError>) {}
+    func firestoreDao(deletionResult: Swift.Result<Void, FirestoreDaoWriteError>) {}
 
     // Access multiple documents.
 
-    func firestoreDao(_ firestoreDao: FirestoreDao<Self>, allDocumentsFetchingResult: Swift.Result<[Model], FirestoreDaoFetchError>) {}
+    func firestoreDao(allDocumentsFetchingResult: Swift.Result<[Model], FirestoreDaoFetchError>) {}
 
-    func firestoreDao(_ firestoreDao: FirestoreDao<Self>, documentsFetchingResult: Swift.Result<[Model], FirestoreDaoFetchError>) {}
+    func firestoreDao(documentsFetchingResult: Swift.Result<[Model], FirestoreDaoFetchError>) {}
     
-    func firestoreDao(_ firestoreDao: FirestoreDao<Self>, batchWritingResult: Swift.Result<Void, FirestoreDaoWriteError>) {}
+    func firestoreDao(batchWritingResult: Swift.Result<Void, FirestoreDaoWriteError>) {}
 }

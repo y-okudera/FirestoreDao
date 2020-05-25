@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,16 +11,63 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Demo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="yX8-Ss-X8c">
+                                <rect key="frame" x="79.5" y="327" width="255" height="242"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mVw-dh-eqW">
+                                        <rect key="frame" x="0.0" y="0.0" width="255" height="30"/>
+                                        <state key="normal" title="Create data"/>
+                                        <connections>
+                                            <action selector="tappedCreateDataButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nJp-tV-hsh"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZCh-97-CRb">
+                                        <rect key="frame" x="0.0" y="53" width="255" height="30"/>
+                                        <state key="normal" title="Fetch and update data"/>
+                                        <connections>
+                                            <action selector="tappedFetchDataButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mIc-IR-GMm"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WJU-r8-42v">
+                                        <rect key="frame" x="0.0" y="106" width="255" height="30"/>
+                                        <state key="normal" title="Delete data"/>
+                                        <connections>
+                                            <action selector="tappedDeleteDataButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qbO-He-vud"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7HO-ab-uIW">
+                                        <rect key="frame" x="0.0" y="159" width="255" height="30"/>
+                                        <state key="normal" title="Fetch all data"/>
+                                        <connections>
+                                            <action selector="tappedFetchAllDataButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="75r-Cd-NRx"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cNg-3r-tXV">
+                                        <rect key="frame" x="0.0" y="212" width="255" height="30"/>
+                                        <state key="normal" title="Fetch multiple data and batch writing"/>
+                                        <connections>
+                                            <action selector="tappedFetchMultipleDataButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="chu-h0-fcf"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="yX8-Ss-X8c" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="s6h-QZ-Pfb"/>
+                            <constraint firstItem="yX8-Ss-X8c" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="sTP-96-wgP"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="139" y="131"/>
         </scene>
     </scenes>
 </document>

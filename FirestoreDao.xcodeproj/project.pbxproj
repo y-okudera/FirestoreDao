@@ -10,6 +10,7 @@
 		3577237A3BF4DC0E4CB40752 /* Pods_FirestoreDao_FirestoreDaoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 422E0A2116826B22B0B03890 /* Pods_FirestoreDao_FirestoreDaoTests.framework */; };
 		9DDCDC889EAF9A6B3FD9D0D6 /* Pods_FirestoreDao.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82CBD049B710BD70E8331ED5 /* Pods_FirestoreDao.framework */; };
 		FC4A51C7247AD92200EC6D2A /* MirrorableEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4A51C6247AD92200EC6D2A /* MirrorableEnum.swift */; };
+		FC7239B2247C0F1D003E25A8 /* FirestoreDao+Delegatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7239B1247C0F1D003E25A8 /* FirestoreDao+Delegatable.swift */; };
 		FCA8991C247A7BB900B14D5C /* FirestoreDao.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA89912247A7BB900B14D5C /* FirestoreDao.framework */; };
 		FCA89921247A7BB900B14D5C /* FirestoreDaoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA89920247A7BB900B14D5C /* FirestoreDaoTests.swift */; };
 		FCA89923247A7BB900B14D5C /* FirestoreDao.h in Headers */ = {isa = PBXBuildFile; fileRef = FCA89915247A7BB900B14D5C /* FirestoreDao.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -42,6 +43,7 @@
 		B803916993E21B04648C6DD2 /* Pods-Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo.debug.xcconfig"; path = "Target Support Files/Pods-Demo/Pods-Demo.debug.xcconfig"; sourceTree = "<group>"; };
 		D6D03C668F57CA361EDDE9DD /* Pods_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC4A51C6247AD92200EC6D2A /* MirrorableEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirrorableEnum.swift; sourceTree = "<group>"; };
+		FC7239B1247C0F1D003E25A8 /* FirestoreDao+Delegatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirestoreDao+Delegatable.swift"; sourceTree = "<group>"; };
 		FCA89912247A7BB900B14D5C /* FirestoreDao.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirestoreDao.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA89915247A7BB900B14D5C /* FirestoreDao.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirestoreDao.h; sourceTree = "<group>"; };
 		FCA89916247A7BB900B14D5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 				FCA89969247ACCB300B14D5C /* FirestoreDaoQueryManager.swift */,
 				FCA8996B247AD07200B14D5C /* FirestoreDaoErrors.swift */,
 				FCA89971247AD0E000B14D5C /* FirestoreDao.swift */,
+				FC7239B1247C0F1D003E25A8 /* FirestoreDao+Delegatable.swift */,
 				FCA8996D247AD0A200B14D5C /* FirestoreDaoDelegate.swift */,
 				FCA8996F247AD0C400B14D5C /* AnyFirestoreDaoDelegate.swift */,
 				FC4A51C6247AD92200EC6D2A /* MirrorableEnum.swift */,
@@ -334,6 +337,7 @@
 				FCA8996A247ACCB300B14D5C /* FirestoreDaoQueryManager.swift in Sources */,
 				FCA89972247AD0E000B14D5C /* FirestoreDao.swift in Sources */,
 				FCA8996E247AD0A200B14D5C /* FirestoreDaoDelegate.swift in Sources */,
+				FC7239B2247C0F1D003E25A8 /* FirestoreDao+Delegatable.swift in Sources */,
 				FC4A51C7247AD92200EC6D2A /* MirrorableEnum.swift in Sources */,
 				FCA89970247AD0C400B14D5C /* AnyFirestoreDaoDelegate.swift in Sources */,
 				FCA8996C247AD07200B14D5C /* FirestoreDaoErrors.swift in Sources */,

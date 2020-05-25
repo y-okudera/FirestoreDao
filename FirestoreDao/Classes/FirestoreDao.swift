@@ -8,15 +8,22 @@
 
 import FirebaseFirestore
 
-public final class FirestoreDao<Delegate: FirestoreDaoDelegate> {
+public final class FirestoreDao {
 
-    /// Callback
-    ///
-    /// - Note: Weak is not required here because the delegate instance is weak in AnyFirestoreDaoDelegate.
-    public var delegate: AnyFirestoreDaoDelegate<Delegate>
+    public enum FirestoreDaoBatchOperationType {
+        case set
+        case update
+        case delete
+    }
 
-    public init(delegate: AnyFirestoreDaoDelegate<Delegate>) {
-        self.delegate = delegate
+    public struct BatchOperator<Model: FirestoreModel> {
+        public let model: Model
+        public let operationType: FirestoreDaoBatchOperationType
+
+        public init(model: Model, operationType: FirestoreDaoBatchOperationType) {
+            self.model = model
+            self.operationType = operationType
+        }
     }
 }
 
@@ -26,71 +33,64 @@ public extension FirestoreDao {
     /// Create a new document.
     /// - Parameters:
     ///   - model: The structure to register.
-    func createDocument(model: Delegate.Model) {
-        let document = Firestore.firestore().collection(Delegate.Model.collectionPath).document(model.documentPath)
-        document.setData(model.initialDictionary) { [weak self] error in
-            guard let `self` = self else {
-                return
-            }
+    ///   - completionHandler: completion handler
+    static func createDocument<Model: FirestoreModel>(model: Model, completionHandler: @escaping (Result<Void, FirestoreDaoWriteError>) -> Void) {
+        let document = Firestore.firestore().collection(Model.collectionPath).document(model.documentPath)
+        document.setData(model.initialDictionary) { error in
             if let error = error {
-                self.delegate.firestoreDao(self, creationResult: .failure(.detail(error)))
+                completionHandler(.failure(.detail(error)))
                 return
             }
-            self.delegate.firestoreDao(self, creationResult: .success(()))
+            completionHandler(.success(()))
         }
     }
 
     /// Update a specific document.
     /// - Parameters:
     ///   - model: The structure to update.
-    func updateDocument(model: Delegate.Model) {
-        let document = Firestore.firestore().collection(Delegate.Model.collectionPath).document(model.documentPath)
-        document.updateData(model.updateDictionary) { [weak self] error in
-            guard let `self` = self else {
-                return
-            }
+    ///   - completionHandler: completion handler
+    static func updateDocument<Model: FirestoreModel>(model: Model, completionHandler: @escaping (Result<Void, FirestoreDaoWriteError>) -> Void) {
+        let document = Firestore.firestore().collection(Model.collectionPath).document(model.documentPath)
+        document.updateData(model.updateDictionary) { error in
             if let error = error {
-                self.delegate.firestoreDao(self, updatingResult: .failure(.detail(error)))
+                completionHandler(.failure(.detail(error)))
                 return
             }
-            self.delegate.firestoreDao(self, updatingResult: .success(()))
+            completionHandler(.success(()))
         }
     }
 
     /// Fetch a specific document.
-    /// - Parameter documentPath: A unique path for the document.
-    func fetchDocument(documentPath: String) {
-        Firestore.firestore().collection(Delegate.Model.collectionPath).document(documentPath).getDocument { [weak self] snapshot, error in
-            guard let `self` = self else {
-                return
-            }
+    /// - Parameters:
+    ///   - documentPath: A unique path for the document.
+    ///   - completionHandler: completion handler
+    static func fetchDocument<Model: FirestoreModel>(documentPath: String, completionHandler: @escaping (Result<Model, FirestoreDaoFetchError>) -> Void) {
+        Firestore.firestore().collection(Model.collectionPath).document(documentPath).getDocument { snapshot, error in
             if let error = error {
-                self.delegate.firestoreDao(self, fetchingResult: .failure(.detail(error)))
+                completionHandler(.failure(.detail(error)))
                 return
             }
             guard let snapshotData = snapshot?.data() else {
-                self.delegate.firestoreDao(self, fetchingResult: .failure(.snapshotDataNotFound))
+                completionHandler(.failure(.snapshotDataNotFound))
                 return
             }
-            let model = Delegate.Model(documentPath: documentPath, data: snapshotData)
-            self.delegate.firestoreDao(self, fetchingResult: .success(model))
+            let model = Model(documentPath: documentPath, data: snapshotData)
+            completionHandler(.success(model))
         }
     }
 
     /// Delete a specific document.
     /// - Parameters:
     ///   - documentPath: A unique path for the document.
-    func deleteDocument(documentPath: String) {
-        let document = Firestore.firestore().collection(Delegate.Model.collectionPath).document(documentPath)
-        document.delete { [weak self] error in
-            guard let `self` = self else {
-                return
-            }
+    ///   - completionHandler: completion handler
+    static func deleteDocument<Model: FirestoreModel>(modelType: Model.Type, documentPath: String, completionHandler: @escaping (Result<Void, FirestoreDaoWriteError>) -> Void) {
+        let document = Firestore.firestore().collection(Model.collectionPath).document(documentPath)
+        document.delete { error in
             if let error = error {
-                self.delegate.firestoreDao(self, deletionResult: .failure(.detail(error)))
+                completionHandler(.failure(.detail(error)))
                 return
             }
-            self.delegate.firestoreDao(self, deletionResult: .success(()))
+            completionHandler(.success(()))
         }
     }
 }
@@ -98,42 +98,41 @@ public extension FirestoreDao {
 public extension FirestoreDao {
 
     /// Fetch all documents.
-    func fetchAllDocuments() {
-        Firestore.firestore().collection(Delegate.Model.collectionPath).getDocuments { [weak self] snapshot, error in
-            guard let `self` = self else {
-                return
-            }
+    /// - Parameters:
+    ///   - completionHandler: completion handler
+    static func fetchAllDocuments<Model: FirestoreModel>(completionHandler: @escaping (Result<[Model], FirestoreDaoFetchError>) -> Void) {
+        Firestore.firestore().collection(Model.collectionPath).getDocuments { snapshot, error in
             if let error = error {
-                self.delegate.firestoreDao(self, allDocumentsFetchingResult: .failure(.detail(error)))
+                completionHandler(.failure(.detail(error)))
                 return
             }
             guard let snapshot = snapshot else {
-                self.delegate.firestoreDao(self, allDocumentsFetchingResult: .failure(.snapshotDataNotFound))
+                completionHandler(.failure(.snapshotDataNotFound))
                 return
             }
-            let models = snapshot.documents.map { Delegate.Model.init(documentPath: $0.documentID, data: $0.data()) }
-            self.delegate.firestoreDao(self, allDocumentsFetchingResult: .success(models))
+            let models = snapshot.documents.map { Model(documentPath: $0.documentID, data: $0.data()) }
+            completionHandler(.success(models))
         }
     }
 
     /// Fetch multiple documents.
-    func fetchDocuments(query: (FirestoreDaoQueryManager<Delegate.Model>) -> Query = { $0.query }) {
-        let collectionReference = Firestore.firestore().collection(Delegate.Model.collectionPath)
-        let manager = FirestoreDaoQueryManager<Delegate.Model>(query: collectionReference)
-        query(manager).getDocuments { [weak self] snapshot, error in
-            guard let `self` = self else {
-                return
-            }
+    /// - Parameters:
+    ///   - completionHandler: completion handler
+    static func fetchDocuments<Model: FirestoreModel>(query: (FirestoreDaoQueryManager<Model>) -> Query = { $0.query },
+                                                      completionHandler: @escaping (Result<[Model], FirestoreDaoFetchError>) -> Void) {
+        let collectionReference = Firestore.firestore().collection(Model.collectionPath)
+        let manager = FirestoreDaoQueryManager<Model>(query: collectionReference)
+        query(manager).getDocuments { snapshot, error in
             if let error = error {
-                self.delegate.firestoreDao(self, documentsFetchingResult: .failure(.detail(error)))
+                completionHandler(.failure(.detail(error)))
                 return
             }
             guard let snapshot = snapshot else {
-                self.delegate.firestoreDao(self, documentsFetchingResult: .failure(.snapshotDataNotFound))
+                completionHandler(.failure(.snapshotDataNotFound))
                 return
             }
-            let models = snapshot.documents.map { Delegate.Model.init(documentPath: $0.documentID, data: $0.data()) }
-            self.delegate.firestoreDao(self, documentsFetchingResult: .success(models))
+            let models = snapshot.documents.map { Model(documentPath: $0.documentID, data: $0.data()) }
+            completionHandler(.success(models))
         }
     }
 }
@@ -141,32 +140,18 @@ public extension FirestoreDao {
 // MARK: - Access multiple documents.
 public extension FirestoreDao {
 
-    enum FirestoreDaoBatchOperationType {
-        case set
-        case update
-        case delete
-    }
-
-    struct BatchOperator {
-        public let model: Delegate.Model
-        public let operationType: FirestoreDaoBatchOperationType
-
-        public init(model: Delegate.Model, operationType: FirestoreDaoBatchOperationType) {
-            self.model = model
-            self.operationType = operationType
-        }
-    }
-
     /// A set of write operations on one or more documents.
-    /// - Parameter batchOperators: Array of structures with data model and operation type.
+    /// - Parameters:
+    ///   - batchOperators: Array of structures with data model and operation type.
+    ///   - completionHandler: completion handler
     ///
     /// - Note: Batch of writes can write to a maximum of 500 documents. For additional limits related to writes,
     /// see [Quotas and Limits](https://firebase.google.com/docs/firestore/quotas#writes_and_transactions).
-    func batch(batchOperators: [BatchOperator]) {
+    static func batch<Model: FirestoreModel>(batchOperators: [FirestoreDao.BatchOperator<Model>], completionHandler: @escaping (Result<Void, FirestoreDaoWriteError>) -> Void) {
         let batch = Firestore.firestore().batch()
 
         batchOperators.forEach {
-            let document = Firestore.firestore().collection(Delegate.Model.collectionPath).document($0.model.documentPath)
+            let document = Firestore.firestore().collection(Model.collectionPath).document($0.model.documentPath)
 
             switch $0.operationType {
             case .set:
@@ -178,15 +163,12 @@ public extension FirestoreDao {
             }
         }
 
-        batch.commit { [weak self] error in
-            guard let `self` = self else {
-                return
-            }
+        batch.commit { error in
             if let error = error {
-                self.delegate.firestoreDao(self, batchWritingResult: .failure(.detail(error)))
+                completionHandler(.failure(.detail(error)))
                 return
             }
-            self.delegate.firestoreDao(self, batchWritingResult: .success(()))
+            completionHandler(.success(()))
         }
     }
 }
