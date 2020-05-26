@@ -1,0 +1,616 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3577237A3BF4DC0E4CB40752 /* Pods_FirestoreDao_FirestoreDaoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 422E0A2116826B22B0B03890 /* Pods_FirestoreDao_FirestoreDaoTests.framework */; };
+		9DDCDC889EAF9A6B3FD9D0D6 /* Pods_FirestoreDao.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82CBD049B710BD70E8331ED5 /* Pods_FirestoreDao.framework */; };
+		FC4A51C7247AD92200EC6D2A /* MirrorableEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4A51C6247AD92200EC6D2A /* MirrorableEnum.swift */; };
+		FC7239B2247C0F1D003E25A8 /* FirestoreDao+Delegatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7239B1247C0F1D003E25A8 /* FirestoreDao+Delegatable.swift */; };
+		FCA8991C247A7BB900B14D5C /* FirestoreDao.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA89912247A7BB900B14D5C /* FirestoreDao.framework */; };
+		FCA89921247A7BB900B14D5C /* FirestoreDaoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA89920247A7BB900B14D5C /* FirestoreDaoTests.swift */; };
+		FCA89923247A7BB900B14D5C /* FirestoreDao.h in Headers */ = {isa = PBXBuildFile; fileRef = FCA89915247A7BB900B14D5C /* FirestoreDao.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FCA89933247AC3AC00B14D5C /* FirestoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA89931247AC3AC00B14D5C /* FirestoreModel.swift */; };
+		FCA8996A247ACCB300B14D5C /* FirestoreDaoQueryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA89969247ACCB300B14D5C /* FirestoreDaoQueryManager.swift */; };
+		FCA8996C247AD07200B14D5C /* FirestoreDaoErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA8996B247AD07200B14D5C /* FirestoreDaoErrors.swift */; };
+		FCA8996E247AD0A200B14D5C /* FirestoreDaoDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA8996D247AD0A200B14D5C /* FirestoreDaoDelegate.swift */; };
+		FCA89970247AD0C400B14D5C /* AnyFirestoreDaoDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA8996F247AD0C400B14D5C /* AnyFirestoreDaoDelegate.swift */; };
+		FCA89972247AD0E000B14D5C /* FirestoreDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA89971247AD0E000B14D5C /* FirestoreDao.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FCA8991D247A7BB900B14D5C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FCA89909247A7BB900B14D5C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FCA89911247A7BB900B14D5C;
+			remoteInfo = FirestoreDao;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		256E70FBA0B62BACADA6A056 /* Pods-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo.release.xcconfig"; path = "Target Support Files/Pods-Demo/Pods-Demo.release.xcconfig"; sourceTree = "<group>"; };
+		2C79C78CA89CEE8066AFD13B /* Pods-FirestoreDao.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirestoreDao.debug.xcconfig"; path = "Target Support Files/Pods-FirestoreDao/Pods-FirestoreDao.debug.xcconfig"; sourceTree = "<group>"; };
+		422E0A2116826B22B0B03890 /* Pods_FirestoreDao_FirestoreDaoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirestoreDao_FirestoreDaoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5CEF6E15521B655DD432A713 /* Pods-FirestoreDao.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirestoreDao.release.xcconfig"; path = "Target Support Files/Pods-FirestoreDao/Pods-FirestoreDao.release.xcconfig"; sourceTree = "<group>"; };
+		62B5D9FA50B5E813BB1A2F4C /* Pods-FirestoreDao-FirestoreDaoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirestoreDao-FirestoreDaoTests.debug.xcconfig"; path = "Target Support Files/Pods-FirestoreDao-FirestoreDaoTests/Pods-FirestoreDao-FirestoreDaoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		82CBD049B710BD70E8331ED5 /* Pods_FirestoreDao.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirestoreDao.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		83C747ACE80D441B04EC34FB /* Pods-FirestoreDao-FirestoreDaoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirestoreDao-FirestoreDaoTests.release.xcconfig"; path = "Target Support Files/Pods-FirestoreDao-FirestoreDaoTests/Pods-FirestoreDao-FirestoreDaoTests.release.xcconfig"; sourceTree = "<group>"; };
+		B803916993E21B04648C6DD2 /* Pods-Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo.debug.xcconfig"; path = "Target Support Files/Pods-Demo/Pods-Demo.debug.xcconfig"; sourceTree = "<group>"; };
+		D6D03C668F57CA361EDDE9DD /* Pods_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC4A51C6247AD92200EC6D2A /* MirrorableEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirrorableEnum.swift; sourceTree = "<group>"; };
+		FC7239B1247C0F1D003E25A8 /* FirestoreDao+Delegatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirestoreDao+Delegatable.swift"; sourceTree = "<group>"; };
+		FCA89912247A7BB900B14D5C /* FirestoreDao.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirestoreDao.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCA89915247A7BB900B14D5C /* FirestoreDao.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirestoreDao.h; sourceTree = "<group>"; };
+		FCA89916247A7BB900B14D5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FCA8991B247A7BB900B14D5C /* FirestoreDaoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FirestoreDaoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCA89920247A7BB900B14D5C /* FirestoreDaoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreDaoTests.swift; sourceTree = "<group>"; };
+		FCA89922247A7BB900B14D5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FCA89931247AC3AC00B14D5C /* FirestoreModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirestoreModel.swift; sourceTree = "<group>"; };
+		FCA89969247ACCB300B14D5C /* FirestoreDaoQueryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreDaoQueryManager.swift; sourceTree = "<group>"; };
+		FCA8996B247AD07200B14D5C /* FirestoreDaoErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreDaoErrors.swift; sourceTree = "<group>"; };
+		FCA8996D247AD0A200B14D5C /* FirestoreDaoDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreDaoDelegate.swift; sourceTree = "<group>"; };
+		FCA8996F247AD0C400B14D5C /* AnyFirestoreDaoDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyFirestoreDaoDelegate.swift; sourceTree = "<group>"; };
+		FCA89971247AD0E000B14D5C /* FirestoreDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreDao.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FCA8990F247A7BB900B14D5C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9DDCDC889EAF9A6B3FD9D0D6 /* Pods_FirestoreDao.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FCA89918247A7BB900B14D5C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCA8991C247A7BB900B14D5C /* FirestoreDao.framework in Frameworks */,
+				3577237A3BF4DC0E4CB40752 /* Pods_FirestoreDao_FirestoreDaoTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		50CB8FC92D52FB4F0FE7C8EE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2C79C78CA89CEE8066AFD13B /* Pods-FirestoreDao.debug.xcconfig */,
+				5CEF6E15521B655DD432A713 /* Pods-FirestoreDao.release.xcconfig */,
+				62B5D9FA50B5E813BB1A2F4C /* Pods-FirestoreDao-FirestoreDaoTests.debug.xcconfig */,
+				83C747ACE80D441B04EC34FB /* Pods-FirestoreDao-FirestoreDaoTests.release.xcconfig */,
+				B803916993E21B04648C6DD2 /* Pods-Demo.debug.xcconfig */,
+				256E70FBA0B62BACADA6A056 /* Pods-Demo.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		69AD9D14927F11B18FC63D97 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				82CBD049B710BD70E8331ED5 /* Pods_FirestoreDao.framework */,
+				422E0A2116826B22B0B03890 /* Pods_FirestoreDao_FirestoreDaoTests.framework */,
+				D6D03C668F57CA361EDDE9DD /* Pods_Demo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FCA89908247A7BB900B14D5C = {
+			isa = PBXGroup;
+			children = (
+				FCA89914247A7BB900B14D5C /* FirestoreDao */,
+				FCA8991F247A7BB900B14D5C /* FirestoreDaoTests */,
+				FCA89913247A7BB900B14D5C /* Products */,
+				50CB8FC92D52FB4F0FE7C8EE /* Pods */,
+				69AD9D14927F11B18FC63D97 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		FCA89913247A7BB900B14D5C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FCA89912247A7BB900B14D5C /* FirestoreDao.framework */,
+				FCA8991B247A7BB900B14D5C /* FirestoreDaoTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FCA89914247A7BB900B14D5C /* FirestoreDao */ = {
+			isa = PBXGroup;
+			children = (
+				FCA89930247AC3AC00B14D5C /* Classes */,
+				FCA89915247A7BB900B14D5C /* FirestoreDao.h */,
+				FCA89916247A7BB900B14D5C /* Info.plist */,
+			);
+			path = FirestoreDao;
+			sourceTree = "<group>";
+		};
+		FCA8991F247A7BB900B14D5C /* FirestoreDaoTests */ = {
+			isa = PBXGroup;
+			children = (
+				FCA89920247A7BB900B14D5C /* FirestoreDaoTests.swift */,
+				FCA89922247A7BB900B14D5C /* Info.plist */,
+			);
+			path = FirestoreDaoTests;
+			sourceTree = "<group>";
+		};
+		FCA89930247AC3AC00B14D5C /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				FCA89931247AC3AC00B14D5C /* FirestoreModel.swift */,
+				FCA89969247ACCB300B14D5C /* FirestoreDaoQueryManager.swift */,
+				FCA8996B247AD07200B14D5C /* FirestoreDaoErrors.swift */,
+				FCA89971247AD0E000B14D5C /* FirestoreDao.swift */,
+				FC7239B1247C0F1D003E25A8 /* FirestoreDao+Delegatable.swift */,
+				FCA8996D247AD0A200B14D5C /* FirestoreDaoDelegate.swift */,
+				FCA8996F247AD0C400B14D5C /* AnyFirestoreDaoDelegate.swift */,
+				FC4A51C6247AD92200EC6D2A /* MirrorableEnum.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		FCA8990D247A7BB900B14D5C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCA89923247A7BB900B14D5C /* FirestoreDao.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		FCA89911247A7BB900B14D5C /* FirestoreDao */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FCA89926247A7BB900B14D5C /* Build configuration list for PBXNativeTarget "FirestoreDao" */;
+			buildPhases = (
+				198FCDE61A672F5D1CA336EE /* [CP] Check Pods Manifest.lock */,
+				FCA8990D247A7BB900B14D5C /* Headers */,
+				FCA8990E247A7BB900B14D5C /* Sources */,
+				FCA8990F247A7BB900B14D5C /* Frameworks */,
+				FCA89910247A7BB900B14D5C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FirestoreDao;
+			productName = FirestoreDao;
+			productReference = FCA89912247A7BB900B14D5C /* FirestoreDao.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		FCA8991A247A7BB900B14D5C /* FirestoreDaoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FCA89929247A7BB900B14D5C /* Build configuration list for PBXNativeTarget "FirestoreDaoTests" */;
+			buildPhases = (
+				7C961795B761AABA3DB2BAB5 /* [CP] Check Pods Manifest.lock */,
+				FCA89917247A7BB900B14D5C /* Sources */,
+				FCA89918247A7BB900B14D5C /* Frameworks */,
+				FCA89919247A7BB900B14D5C /* Resources */,
+				28A47A27400AE147BF147F25 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FCA8991E247A7BB900B14D5C /* PBXTargetDependency */,
+			);
+			name = FirestoreDaoTests;
+			productName = FirestoreDaoTests;
+			productReference = FCA8991B247A7BB900B14D5C /* FirestoreDaoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FCA89909247A7BB900B14D5C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1140;
+				LastUpgradeCheck = 1140;
+				ORGANIZATIONNAME = yuoku;
+				TargetAttributes = {
+					FCA89911247A7BB900B14D5C = {
+						CreatedOnToolsVersion = 11.4.1;
+						LastSwiftMigration = 1140;
+					};
+					FCA8991A247A7BB900B14D5C = {
+						CreatedOnToolsVersion = 11.4.1;
+					};
+				};
+			};
+			buildConfigurationList = FCA8990C247A7BB900B14D5C /* Build configuration list for PBXProject "FirestoreDao" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FCA89908247A7BB900B14D5C;
+			productRefGroup = FCA89913247A7BB900B14D5C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FCA89911247A7BB900B14D5C /* FirestoreDao */,
+				FCA8991A247A7BB900B14D5C /* FirestoreDaoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FCA89910247A7BB900B14D5C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FCA89919247A7BB900B14D5C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		198FCDE61A672F5D1CA336EE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FirestoreDao-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		28A47A27400AE147BF147F25 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FirestoreDao-FirestoreDaoTests/Pods-FirestoreDao-FirestoreDaoTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FirestoreDao-FirestoreDaoTests/Pods-FirestoreDao-FirestoreDaoTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FirestoreDao-FirestoreDaoTests/Pods-FirestoreDao-FirestoreDaoTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7C961795B761AABA3DB2BAB5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FirestoreDao-FirestoreDaoTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FCA8990E247A7BB900B14D5C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCA89933247AC3AC00B14D5C /* FirestoreModel.swift in Sources */,
+				FCA8996A247ACCB300B14D5C /* FirestoreDaoQueryManager.swift in Sources */,
+				FCA89972247AD0E000B14D5C /* FirestoreDao.swift in Sources */,
+				FCA8996E247AD0A200B14D5C /* FirestoreDaoDelegate.swift in Sources */,
+				FC7239B2247C0F1D003E25A8 /* FirestoreDao+Delegatable.swift in Sources */,
+				FC4A51C7247AD92200EC6D2A /* MirrorableEnum.swift in Sources */,
+				FCA89970247AD0C400B14D5C /* AnyFirestoreDaoDelegate.swift in Sources */,
+				FCA8996C247AD07200B14D5C /* FirestoreDaoErrors.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FCA89917247A7BB900B14D5C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCA89921247A7BB900B14D5C /* FirestoreDaoTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FCA8991E247A7BB900B14D5C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FCA89911247A7BB900B14D5C /* FirestoreDao */;
+			targetProxy = FCA8991D247A7BB900B14D5C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		FCA89924247A7BB900B14D5C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		FCA89925247A7BB900B14D5C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		FCA89927247A7BB900B14D5C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2C79C78CA89CEE8066AFD13B /* Pods-FirestoreDao.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = B8PR34D6DP;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = FirestoreDao/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = jp.yuoku.FirestoreDao;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FCA89928247A7BB900B14D5C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5CEF6E15521B655DD432A713 /* Pods-FirestoreDao.release.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = B8PR34D6DP;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = FirestoreDao/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = jp.yuoku.FirestoreDao;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		FCA8992A247A7BB900B14D5C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 62B5D9FA50B5E813BB1A2F4C /* Pods-FirestoreDao-FirestoreDaoTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B8PR34D6DP;
+				INFOPLIST_FILE = FirestoreDaoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = jp.yuoku.FirestoreDaoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FCA8992B247A7BB900B14D5C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 83C747ACE80D441B04EC34FB /* Pods-FirestoreDao-FirestoreDaoTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B8PR34D6DP;
+				INFOPLIST_FILE = FirestoreDaoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = jp.yuoku.FirestoreDaoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FCA8990C247A7BB900B14D5C /* Build configuration list for PBXProject "FirestoreDao" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FCA89924247A7BB900B14D5C /* Debug */,
+				FCA89925247A7BB900B14D5C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FCA89926247A7BB900B14D5C /* Build configuration list for PBXNativeTarget "FirestoreDao" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FCA89927247A7BB900B14D5C /* Debug */,
+				FCA89928247A7BB900B14D5C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FCA89929247A7BB900B14D5C /* Build configuration list for PBXNativeTarget "FirestoreDaoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FCA8992A247A7BB900B14D5C /* Debug */,
+				FCA8992B247A7BB900B14D5C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FCA89909247A7BB900B14D5C /* Project object */;
+}
