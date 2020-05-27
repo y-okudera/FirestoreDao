@@ -16,7 +16,7 @@
 		FCA8998C247AF6D700B14D5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCA8998B247AF6D700B14D5C /* Assets.xcassets */; };
 		FCA8998F247AF6D700B14D5C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCA8998D247AF6D700B14D5C /* LaunchScreen.storyboard */; };
 		FCA8999A247AF6D700B14D5C /* DemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA89999247AF6D700B14D5C /* DemoTests.swift */; };
-		FCA899A6247AF79E00B14D5C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA899A5247AF79E00B14D5C /* User.swift */; };
+		FCA899A6247AF79E00B14D5C /* Fruit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA899A5247AF79E00B14D5C /* Fruit.swift */; };
 		FCA899A8247AFA1900B14D5C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCA899A7247AFA1900B14D5C /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -48,7 +48,7 @@
 		FCA89995247AF6D700B14D5C /* DemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA89999247AF6D700B14D5C /* DemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoTests.swift; sourceTree = "<group>"; };
 		FCA8999B247AF6D700B14D5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FCA899A5247AF79E00B14D5C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		FCA899A5247AF79E00B14D5C /* Fruit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fruit.swift; sourceTree = "<group>"; };
 		FCA899A7247AFA1900B14D5C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -131,7 +131,7 @@
 		FCA899A4247AF79E00B14D5C /* FirestoreModel */ = {
 			isa = PBXGroup;
 			children = (
-				FCA899A5247AF79E00B14D5C /* User.swift */,
+				FCA899A5247AF79E00B14D5C /* Fruit.swift */,
 			);
 			path = FirestoreModel;
 			sourceTree = "<group>";
@@ -314,7 +314,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FCA899A6247AF79E00B14D5C /* User.swift in Sources */,
+				FCA899A6247AF79E00B14D5C /* Fruit.swift in Sources */,
 				FCA89987247AF6D700B14D5C /* ViewController.swift in Sources */,
 				FCA89983247AF6D700B14D5C /* AppDelegate.swift in Sources */,
 				FCA89985247AF6D700B14D5C /* SceneDelegate.swift in Sources */,

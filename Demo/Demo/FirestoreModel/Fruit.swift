@@ -1,5 +1,5 @@
 //
-//  User.swift
+//  Fruit.swift
 //  Demo
 //
 //  Created by okudera on 2020/05/25.
@@ -11,12 +11,12 @@ import FirebaseFirestore
 import FirestoreDao
 
 /// Firestore field model sample
-struct User: FirestoreModel {
-    static let collectionPath: String = "user"
+struct Fruit: FirestoreModel {
+    static let collectionPath: String = "fruit"
     let documentPath: String
 
-    let userID: String
-    let userName: String
+    let fruitID: String
+    let name: String
     let content: String
     let backImage: String?
     let iconImage: String?
@@ -25,8 +25,8 @@ struct User: FirestoreModel {
 
     init(documentPath: String, data: [String: Any]) {
         self.documentPath = documentPath
-        self.userID = data[Keys.userID.key] as! String
-        self.userName = data[Keys.userName.key] as! String
+        self.fruitID = data[Keys.fruitID.key] as! String
+        self.name = data[Keys.name.key] as! String
         self.content = data[Keys.content.key] as! String
         self.backImage = data[Keys.backImage.key] as? String
         self.iconImage = data[Keys.iconImage.key] as? String
@@ -36,35 +36,35 @@ struct User: FirestoreModel {
 
     /// Initializer for new data.
     init(uid: String, name: String) {
-        let userData: [String: Any] = [
-            Keys.userID.key: uid,
-            Keys.userName.key: name,
+        let fruitData: [String: Any] = [
+            Keys.fruitID.key: uid,
+            Keys.name.key: name,
             Keys.content.key: "",
             Keys.createdAt.key: Timestamp(),
             Keys.updatedAt.key: Timestamp()
         ]
-        self = .init(documentPath: uid, data: userData)
+        self = .init(documentPath: uid, data: fruitData)
     }
 
     /// Initializer for update data.
-    init(oldUserData: User, content: String, iconImageUrl: URL?, backImageUrl: URL?) {
+    init(oldFruitData: Fruit, content: String, iconImageUrl: URL?, backImageUrl: URL?) {
         let iconImageUrlString = iconImageUrl?.absoluteString ?? ""
         let backImageUrlString = backImageUrl?.absoluteString ?? ""
 
-        var userData: [String: Any] = [
-            Keys.userID.key: oldUserData.userID,
-            Keys.userName.key: oldUserData.userName,
+        var fruitData: [String: Any] = [
+            Keys.fruitID.key: oldFruitData.fruitID,
+            Keys.name.key: oldFruitData.name,
             Keys.content.key: content,
-            Keys.createdAt.key: oldUserData.createdAt,
-            Keys.updatedAt.key: oldUserData.updatedAt
+            Keys.createdAt.key: oldFruitData.createdAt,
+            Keys.updatedAt.key: oldFruitData.updatedAt
         ]
         if !iconImageUrlString.isEmpty {
-            userData[Keys.iconImage.key] = iconImageUrlString
+            fruitData[Keys.iconImage.key] = iconImageUrlString
         }
         if !backImageUrlString.isEmpty {
-            userData[Keys.backImage.key] = backImageUrlString
+            fruitData[Keys.backImage.key] = backImageUrlString
         }
-        self = .init(documentPath: oldUserData.userID, data: userData)
+        self = .init(documentPath: oldFruitData.fruitID, data: fruitData)
     }
 
     var initialDictionary: [String: Any] {
@@ -83,8 +83,8 @@ struct User: FirestoreModel {
 
     private var dictionaryWithoutTimestamp: [String: Any] {
         var dic: [String: Any] = [
-            Keys.userID.key: userID,
-            Keys.userName.key: userName,
+            Keys.fruitID.key: fruitID,
+            Keys.name.key: name,
             Keys.content.key: content
         ]
         if let backImage = self.backImage {
@@ -97,18 +97,18 @@ struct User: FirestoreModel {
     }
 }
 
-extension User {
+extension Fruit {
 
-    /// User properties key
+    /// Fruit property keys
     enum Keys: FirestoreModelKeys {
 
-        typealias FirestoreModelType = Demo.User
+        typealias FirestoreModelType = Demo.Fruit
 
         case content
         case backImage
         case iconImage
-        case userID
-        case userName
+        case fruitID
+        case name
         case createdAt
         case updatedAt
 

@@ -48,4 +48,8 @@ public final class AnyFirestoreDaoDelegate<Delegate: FirestoreDaoDelegate> {
     public func firestoreDao(batchWritingResult: Swift.Result<Void, FirestoreDaoWriteError>) {
         delegate?.firestoreDao(batchWritingResult: batchWritingResult)
     }
+
+    public func firestoreDao(prefixSearchingResult: Swift.Result<[Delegate.Model], FirestoreDaoFetchError>) {
+        delegate?.firestoreDao(prefixSearchingResult: prefixSearchingResult)
+    }
 }

@@ -135,6 +135,29 @@ public extension FirestoreDao {
             completionHandler(.success(models))
         }
     }
+
+    /// Search by prefix match.
+    /// - Parameters:
+    ///   - field: Field in the document
+    ///   - searchWord: Search word
+    ///   - limit: limit
+    ///   - completionHandler: completion handler
+    static func searchDocumentsByPrefixMatch<Model: FirestoreModel>(field: Model.Keys,
+                                                                    searchWord: String,
+                                                                    limit: Int?,
+                                                                    completionHandler: @escaping (Result<[Model], FirestoreDaoFetchError>) -> Void) {
+        self.fetchDocuments(query: { queryManager -> Query in
+            queryManager.order(by: field, descending: false)
+            queryManager.start(at: [searchWord])
+            queryManager.end(at: [searchWord + "\u{f8ff}"])
+            if let limit = limit {
+                queryManager.limit(to: limit)
+            }
+            return queryManager.query
+        }, completionHandler: { result in
+            completionHandler(result)
+        })
+    }
 }
 
 // MARK: - Access multiple documents.
