@@ -28,6 +28,8 @@ public protocol FirestoreDaoDelegate: AnyObject {
 
     func firestoreDao(documentsFetchingResult: Swift.Result<[Model], FirestoreDaoFetchError>)
 
+    func firestoreDao(prefixSearchingResult: Swift.Result<[Model], FirestoreDaoFetchError>)
+
     func firestoreDao(batchWritingResult: Swift.Result<Void, FirestoreDaoWriteError>)
 }
 
@@ -49,6 +51,8 @@ public extension FirestoreDaoDelegate {
     func firestoreDao(allDocumentsFetchingResult: Swift.Result<[Model], FirestoreDaoFetchError>) {}
 
     func firestoreDao(documentsFetchingResult: Swift.Result<[Model], FirestoreDaoFetchError>) {}
+
+    func firestoreDao(prefixSearchingResult: Swift.Result<[Model], FirestoreDaoFetchError>) {}
     
     func firestoreDao(batchWritingResult: Swift.Result<Void, FirestoreDaoWriteError>) {}
 }

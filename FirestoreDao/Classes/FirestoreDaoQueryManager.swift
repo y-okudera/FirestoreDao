@@ -91,4 +91,16 @@ public extension FirestoreDaoQueryManager {
     func start(afterDocument document: DocumentSnapshot) {
         self.query = self.query.start(afterDocument: document)
     }
+
+    /// Starts at the provided fields relative to the order of the query.
+    /// The order of the field values must match the order of the order by clauses of the query.
+    func start(at fieldValues: [Any]) {
+        self.query = self.query.start(at: fieldValues)
+    }
+
+    /// Ends at the provided fields relative to the order of the query.
+    /// The order of the field values must match the order of the order by clauses of the query.
+    func end(at fieldValues: [Any]) {
+        self.query = self.query.end(at: fieldValues)
+    }
 }

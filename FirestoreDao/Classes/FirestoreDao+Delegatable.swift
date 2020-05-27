@@ -114,7 +114,7 @@ public extension FirestoreDao.DelegatableDao {
                 self.delegate.firestoreDao(allDocumentsFetchingResult: .failure(.snapshotDataNotFound))
                 return
             }
-            let models = snapshot.documents.map { Delegate.Model.init(documentPath: $0.documentID, data: $0.data()) }
+            let models = snapshot.documents.map { Delegate.Model(documentPath: $0.documentID, data: $0.data()) }
             self.delegate.firestoreDao(allDocumentsFetchingResult: .success(models))
         }
     }
@@ -135,8 +135,40 @@ public extension FirestoreDao.DelegatableDao {
                 self.delegate.firestoreDao(documentsFetchingResult: .failure(.snapshotDataNotFound))
                 return
             }
-            let models = snapshot.documents.map { Delegate.Model.init(documentPath: $0.documentID, data: $0.data()) }
+            let models = snapshot.documents.map { Delegate.Model(documentPath: $0.documentID, data: $0.data()) }
             self.delegate.firestoreDao(documentsFetchingResult: .success(models))
+        }
+    }
+
+    /// Search by prefix match.
+    /// - Parameters:
+    ///   - field: Field in the document
+    ///   - searchWord: Search word
+    ///   - limit: limit
+    func searchDocumentsByPrefixMatch(field: Delegate.Model.Keys, searchWord: String, limit: Int?) {
+
+        let collectionReference = Firestore.firestore().collection(Delegate.Model.collectionPath)
+        let manager = FirestoreDaoQueryManager<Delegate.Model>(query: collectionReference)
+        manager.order(by: field, descending: false)
+        manager.start(at: [searchWord])
+        manager.end(at: [searchWord + "\u{f8ff}"])
+        if let limit = limit {
+            manager.limit(to: limit)
+        }
+        manager.query.getDocuments { [weak self] snapshot, error in
+            guard let `self` = self else {
+                return
+            }
+            if let error = error {
+                self.delegate.firestoreDao(prefixSearchingResult: .failure(.detail(error)))
+                return
+            }
+            guard let snapshot = snapshot else {
+                self.delegate.firestoreDao(prefixSearchingResult: .failure(.snapshotDataNotFound))
+                return
+            }
+            let models = snapshot.documents.map { Delegate.Model(documentPath: $0.documentID, data: $0.data()) }
+            self.delegate.firestoreDao(prefixSearchingResult: .success(models))
         }
     }
 }

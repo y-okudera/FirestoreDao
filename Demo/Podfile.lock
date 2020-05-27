@@ -249,7 +249,7 @@ PODS:
     - "gRPC-C++ (~> 1.28.0)"
     - leveldb-library (~> 1.22)
     - nanopb (~> 1.30905.0)
-  - FirestoreDao (0.0.1):
+  - FirestoreDao (0.0.2):
     - Firebase/Firestore
   - GoogleDataTransport (6.1.0)
   - GoogleDataTransportCCTSupport (3.1.0):
@@ -327,7 +327,7 @@ SPEC CHECKSUMS:
   FirebaseCoreDiagnostics: 4a773a47bd83bbd5a9b1ccf1ce7caa8b2d535e67
   FirebaseCoreDiagnosticsInterop: 296e2c5f5314500a850ad0b83e9e7c10b011a850
   FirebaseFirestore: 35f8f67d7b25e4743c62ea6e46c38cafa8dc32b5
-  FirestoreDao: 58e9f629cba3ca25cf3abc245a57c22f98941bd4
+  FirestoreDao: 95929829c53ff1900b8097443a37b091bb5a1385
   GoogleDataTransport: f6f8eba931df03ebd2232ff4645aa85f8f47b5ab
   GoogleDataTransportCCTSupport: d70a561f7d236af529fee598835caad5e25f6d3d
   GoogleUtilities: 39530bc0ad980530298e9c4af8549e991fd033b1
