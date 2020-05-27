@@ -46,13 +46,13 @@ final class ViewController: UIViewController {
         fruitDao.fetchDocument(documentPath: "100")
 
         // Use closure
-//        FirestoreDao.fetchDocument(documentPath: "200") { (result: Swift.Result<Fruit, FirestoreDaoFetchError>) in
+//        FirestoreDao.fetchDocument(documentPath: "200") { (result: Swift.Result<FirestoreDao.FetchResponse<Fruit>, FirestoreDaoFetchError>) in
 //            switch result {
-//            case .success(let fruit):
-//                print("Fetched data: \(fruit)")
+//            case .success(let response):
+//                print("Fetched data: \(response)")
 //
 //                print("Start updating fetched data.")
-//                let updatedFruit = Fruit(oldFruitData: fruit,
+//                let updatedFruit = Fruit(oldFruitData: response.model,
 //                                         content: "updated!",
 //                                         iconImageUrl: URL(string: "https://via.placeholder.com/200x100"),
 //                                         backImageUrl: URL(string: "https://via.placeholder.com/300.png/09f/fff"))
@@ -90,10 +90,10 @@ final class ViewController: UIViewController {
         fruitDao.fetchAllDocuments()
 
         // Use closure
-//        FirestoreDao.fetchAllDocuments { (result: Swift.Result<[Fruit], FirestoreDaoFetchError>) in
+//        FirestoreDao.fetchAllDocuments { (result: Swift.Result<[FirestoreDao.FetchResponse<Fruit>], FirestoreDaoFetchError>) in
 //            switch result {
-//            case .success(let fruits):
-//                print("All data fetching succeeded. Count is \(fruits.count) :\(fruits)")
+//            case .success(let response):
+//                print("All data fetching succeeded. Count is \(response.count) :\(response)")
 //            case .failure(let error):
 //                print("All data fetching error: \(error)")
 //            }
@@ -114,15 +114,16 @@ final class ViewController: UIViewController {
 //            queryManager.limit(to: 2)
 //            return queryManager.query
 //
-//        }, completionHandler: { (result: Swift.Result<[Fruit], FirestoreDaoFetchError>) in
+//        }, completionHandler: { (result: Swift.Result<[FirestoreDao.FetchResponse<Fruit>], FirestoreDaoFetchError>) in
 //            switch result {
-//            case .success(let fruits):
-//                print("Multiple data fetching succeeded. Count is \(fruits.count) :\(fruits)")
+//            case .success(let response):
+//                print("Multiple data fetching succeeded. Count is \(response.count) :\(response)")
 //
 //                print("Start batch writing(update and create)")
+//                let models = response.map { $0.model }
 //                var updatedFruits = [Fruit]()
-//                for (index, fruit) in fruits.enumerated() {
-//                    updatedFruits.append(.init(oldFruitData: fruit, content: "updated!(\(index))", iconImageUrl: nil, backImageUrl: nil))
+//                for (index, model) in models.enumerated() {
+//                    updatedFruits.append(.init(oldFruitData: model, content: "updated!(\(index))", iconImageUrl: nil, backImageUrl: nil))
 //                }
 //                var batchOperators = updatedFruits.map { FirestoreDao.BatchOperator(model: $0, operationType: .update) }
 //                batchOperators.append(.init(model: .init(uid: "600", name: "Banana"), operationType: .set))
@@ -148,10 +149,10 @@ final class ViewController: UIViewController {
         fruitDao.searchDocumentsByPrefixMatch(field: .name, searchWord: "G", limit: nil)
 
         // Use closure
-//        FirestoreDao.searchDocumentsByPrefixMatch(field: .name, searchWord: "G", limit: nil) { (result: Swift.Result<[Fruit], FirestoreDaoFetchError>) in
+//        FirestoreDao.searchDocumentsByPrefixMatch(field: .name, searchWord: "G", limit: nil) { (result: Swift.Result<[FirestoreDao.FetchResponse<Fruit>], FirestoreDaoFetchError>) in
 //            switch result {
-//            case .success(let fruits):
-//                print("Prefix searching succeeded. Count is \(fruits.count) :\(fruits)")
+//            case .success(let response):
+//                print("Prefix searching succeeded. Count is \(response.count) :\(response)")
 //            case .failure(let error):
 //                print("Prefix searching error: \(error)")
 //            }
@@ -183,13 +184,13 @@ extension ViewController: FirestoreDaoDelegate {
         }
     }
 
-    func firestoreDao(fetchingResult: Swift.Result<Fruit, FirestoreDaoFetchError>) {
+    func firestoreDao(fetchingResult: Swift.Result<FirestoreDao.FetchResponse<Fruit>, FirestoreDaoFetchError>) {
         switch fetchingResult {
-        case .success(let fruit):
-            print("Fetch succeeded: \(fruit)")
+        case .success(let response):
+            print("Fetch succeeded: \(response.model)")
 
             print("Start update fetched data.")
-            let updatedFruit = Fruit(oldFruitData: fruit,
+            let updatedFruit = Fruit(oldFruitData: response.model,
                                      content: "updated!",
                                      iconImageUrl: URL(string: "https://via.placeholder.com/200x100"),
                                      backImageUrl: URL(string: "https://via.placeholder.com/300.png/09f/fff"))
@@ -211,25 +212,26 @@ extension ViewController: FirestoreDaoDelegate {
         }
     }
 
-    func firestoreDao(allDocumentsFetchingResult: Result<[Fruit], FirestoreDaoFetchError>) {
+    func firestoreDao(allDocumentsFetchingResult: Result<[FirestoreDao.FetchResponse<Fruit>], FirestoreDaoFetchError>) {
         switch allDocumentsFetchingResult {
-        case .success(let fruits):
-            print("All data fetching succeeded. Count is \(fruits.count) :\(fruits)")
+        case .success(let response):
+            print("All data fetching succeeded. Count is \(response.count) :\(response)")
 
         case .failure(let error):
             print("All data fetching error: \(error)")
         }
     }
 
-    func firestoreDao(documentsFetchingResult: Result<[Fruit], FirestoreDaoFetchError>) {
+    func firestoreDao(documentsFetchingResult: Result<[FirestoreDao.FetchResponse<Fruit>], FirestoreDaoFetchError>) {
         switch documentsFetchingResult {
-        case .success(let fruits):
-            print("Multiple data fetching succeeded. Count is \(fruits.count) :\(fruits)")
+        case .success(let response):
+            print("Multiple data fetching succeeded. Count is \(response.count) :\(response)")
 
             print("Start batch writing(update and create)")
             var updatedFruits = [Fruit]()
-            for (index, fruit) in fruits.enumerated() {
-                updatedFruits.append(.init(oldFruitData: fruit, content: "updated!(\(index))", iconImageUrl: nil, backImageUrl: nil))
+            let models = response.map { $0.model }
+            for (index, model) in models.enumerated() {
+                updatedFruits.append(.init(oldFruitData: model, content: "updated!(\(index))", iconImageUrl: nil, backImageUrl: nil))
             }
             var batchOperators = updatedFruits.map { FirestoreDao.BatchOperator(model: $0, operationType: .update) }
             batchOperators.append(.init(model: .init(uid: "600", name: "Banana"), operationType: .set))
@@ -241,10 +243,10 @@ extension ViewController: FirestoreDaoDelegate {
         }
     }
 
-    func firestoreDao(prefixSearchingResult: Result<[Fruit], FirestoreDaoFetchError>) {
+    func firestoreDao(prefixSearchingResult: Result<[FirestoreDao.FetchResponse<Fruit>], FirestoreDaoFetchError>) {
         switch prefixSearchingResult {
-        case .success(let fruits):
-            print("Prefix searching succeeded. Count is \(fruits.count) :\(fruits)")
+        case .success(let response):
+            print("Prefix searching succeeded. Count is \(response.count) :\(response)")
         case .failure(let error):
             print("Prefix searching error: \(error)")
         }

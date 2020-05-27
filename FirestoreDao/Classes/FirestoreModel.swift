@@ -13,6 +13,12 @@ public protocol FirestoreModelKeys: MirrorableEnum {
     var key: String { get }
 }
 
+public extension FirestoreModelKeys {
+    var key: String {
+        return mirror.label
+    }
+}
+
 public protocol FirestoreModel {
 
     associatedtype Keys: FirestoreModelKeys

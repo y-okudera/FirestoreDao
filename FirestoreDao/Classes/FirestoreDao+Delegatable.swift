@@ -71,11 +71,15 @@ public extension FirestoreDao.DelegatableDao {
                 self.delegate.firestoreDao(fetchingResult: .failure(.detail(error)))
                 return
             }
-            guard let snapshotData = snapshot?.data() else {
+            guard let snapshot = snapshot else {
                 self.delegate.firestoreDao(fetchingResult: .failure(.snapshotDataNotFound))
                 return
             }
-            let model = Delegate.Model(documentPath: documentPath, data: snapshotData)
+            guard let snapshotData = snapshot.data() else {
+                self.delegate.firestoreDao(fetchingResult: .failure(.snapshotDataNotFound))
+                return
+            }
+            let model = FirestoreDao.FetchResponse<Delegate.Model>(model: .init(documentPath: documentPath, data: snapshotData), snapshot: snapshot)
             self.delegate.firestoreDao(fetchingResult: .success(model))
         }
     }
@@ -114,7 +118,7 @@ public extension FirestoreDao.DelegatableDao {
                 self.delegate.firestoreDao(allDocumentsFetchingResult: .failure(.snapshotDataNotFound))
                 return
             }
-            let models = snapshot.documents.map { Delegate.Model(documentPath: $0.documentID, data: $0.data()) }
+            let models = snapshot.documents.map { FirestoreDao.FetchResponse<Delegate.Model>(model: .init(documentPath: $0.documentID, data: $0.data()), snapshot: $0) }
             self.delegate.firestoreDao(allDocumentsFetchingResult: .success(models))
         }
     }
@@ -135,7 +139,7 @@ public extension FirestoreDao.DelegatableDao {
                 self.delegate.firestoreDao(documentsFetchingResult: .failure(.snapshotDataNotFound))
                 return
             }
-            let models = snapshot.documents.map { Delegate.Model(documentPath: $0.documentID, data: $0.data()) }
+            let models = snapshot.documents.map { FirestoreDao.FetchResponse<Delegate.Model>(model: .init(documentPath: $0.documentID, data: $0.data()), snapshot: $0) }
             self.delegate.firestoreDao(documentsFetchingResult: .success(models))
         }
     }
@@ -167,7 +171,7 @@ public extension FirestoreDao.DelegatableDao {
                 self.delegate.firestoreDao(prefixSearchingResult: .failure(.snapshotDataNotFound))
                 return
             }
-            let models = snapshot.documents.map { Delegate.Model(documentPath: $0.documentID, data: $0.data()) }
+            let models = snapshot.documents.map { FirestoreDao.FetchResponse<Delegate.Model>(model: .init(documentPath: $0.documentID, data: $0.data()), snapshot: $0) }
             self.delegate.firestoreDao(prefixSearchingResult: .success(models))
         }
     }
