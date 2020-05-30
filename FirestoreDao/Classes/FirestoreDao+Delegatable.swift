@@ -79,7 +79,7 @@ public extension FirestoreDao.DelegatableDao {
                 self.delegate.firestoreDao(fetchingResult: .failure(.snapshotDataNotFound))
                 return
             }
-            let model = FirestoreDao.FetchResponse<Delegate.Model>(model: .init(documentPath: documentPath, data: snapshotData), snapshot: snapshot)
+            let model = FetchResponse<Delegate.Model>(model: .init(documentPath: documentPath, data: snapshotData), snapshot: snapshot)
             self.delegate.firestoreDao(fetchingResult: .success(model))
         }
     }
@@ -118,7 +118,7 @@ public extension FirestoreDao.DelegatableDao {
                 self.delegate.firestoreDao(allDocumentsFetchingResult: .failure(.snapshotDataNotFound))
                 return
             }
-            let models = snapshot.documents.map { FirestoreDao.FetchResponse<Delegate.Model>(model: .init(documentPath: $0.documentID, data: $0.data()), snapshot: $0) }
+            let models = snapshot.documents.map { FetchResponse<Delegate.Model>(model: .init(documentPath: $0.documentID, data: $0.data()), snapshot: $0) }
             self.delegate.firestoreDao(allDocumentsFetchingResult: .success(models))
         }
     }
@@ -139,7 +139,7 @@ public extension FirestoreDao.DelegatableDao {
                 self.delegate.firestoreDao(documentsFetchingResult: .failure(.snapshotDataNotFound))
                 return
             }
-            let models = snapshot.documents.map { FirestoreDao.FetchResponse<Delegate.Model>(model: .init(documentPath: $0.documentID, data: $0.data()), snapshot: $0) }
+            let models = snapshot.documents.map { FetchResponse<Delegate.Model>(model: .init(documentPath: $0.documentID, data: $0.data()), snapshot: $0) }
             self.delegate.firestoreDao(documentsFetchingResult: .success(models))
         }
     }
@@ -171,7 +171,7 @@ public extension FirestoreDao.DelegatableDao {
                 self.delegate.firestoreDao(prefixSearchingResult: .failure(.snapshotDataNotFound))
                 return
             }
-            let models = snapshot.documents.map { FirestoreDao.FetchResponse<Delegate.Model>(model: .init(documentPath: $0.documentID, data: $0.data()), snapshot: $0) }
+            let models = snapshot.documents.map { FetchResponse<Delegate.Model>(model: .init(documentPath: $0.documentID, data: $0.data()), snapshot: $0) }
             self.delegate.firestoreDao(prefixSearchingResult: .success(models))
         }
     }
@@ -185,7 +185,7 @@ public extension FirestoreDao.DelegatableDao {
     ///
     /// - Note: Batch of writes can write to a maximum of 500 documents. For additional limits related to writes,
     /// see [Quotas and Limits](https://firebase.google.com/docs/firestore/quotas#writes_and_transactions).
-    func batch(batchOperators: [FirestoreDao.BatchOperator<Delegate.Model>]) {
+    func batch(batchOperators: [BatchOperator<Delegate.Model>]) {
         let batch = Firestore.firestore().batch()
 
         batchOperators.forEach {

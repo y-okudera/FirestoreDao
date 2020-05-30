@@ -6,8 +6,6 @@
 //  Copyright © 2020 yuoku. All rights reserved.
 //
 
-import Foundation
-
 public protocol FirestoreModelKeys: MirrorableEnum {
     associatedtype FirestoreModelType
     var key: String { get }

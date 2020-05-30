@@ -6,13 +6,11 @@
 //  Copyright © 2020 yuoku. All rights reserved.
 //
 
-import Foundation
-
-public enum FirestoreDaoFetchError: Error {
+public enum FetchError: Error {
     case snapshotDataNotFound
     case detail(Error)
 }
 
-public enum FirestoreDaoWriteError: Error {
+public enum WriteError: Error {
     case detail(Error)
 }
