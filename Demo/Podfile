@@ -5,7 +5,6 @@ target 'Demo' do
   use_frameworks!
 
   # Pods for Demo
-  pod 'Firebase/Firestore'
   pod 'FirestoreDao', :path => '../'
 
   target 'DemoTests' do
