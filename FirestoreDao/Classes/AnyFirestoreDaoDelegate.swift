@@ -6,7 +6,7 @@
 //  Copyright © 2020 yuoku. All rights reserved.
 //
 
-import Foundation
+import FirebaseFirestore
 
 /// Type Erasure
 public final class AnyFirestoreDaoDelegate<Delegate: FirestoreDaoDelegate> {
@@ -27,7 +27,7 @@ public final class AnyFirestoreDaoDelegate<Delegate: FirestoreDaoDelegate> {
         delegate?.firestoreDao(updatingResult: updatingResult)
     }
 
-    public func firestoreDao(fetchingResult: Swift.Result<Delegate.Model, FirestoreDaoFetchError>) {
+    public func firestoreDao(fetchingResult: Swift.Result<FirestoreDao.FetchResponse<Delegate.Model>, FirestoreDaoFetchError>) {
         delegate?.firestoreDao(fetchingResult: fetchingResult)
     }
 
@@ -37,19 +37,19 @@ public final class AnyFirestoreDaoDelegate<Delegate: FirestoreDaoDelegate> {
 
     // Access multiple documents.
 
-    public func firestoreDao(allDocumentsFetchingResult: Swift.Result<[Delegate.Model], FirestoreDaoFetchError>) {
+    public func firestoreDao(allDocumentsFetchingResult: Swift.Result<[FirestoreDao.FetchResponse<Delegate.Model>], FirestoreDaoFetchError>) {
         delegate?.firestoreDao(allDocumentsFetchingResult: allDocumentsFetchingResult)
     }
 
-    public func firestoreDao(documentsFetchingResult: Swift.Result<[Delegate.Model], FirestoreDaoFetchError>) {
+    public func firestoreDao(documentsFetchingResult: Swift.Result<[FirestoreDao.FetchResponse<Delegate.Model>], FirestoreDaoFetchError>) {
         delegate?.firestoreDao(documentsFetchingResult: documentsFetchingResult)
+    }
+
+    public func firestoreDao(prefixSearchingResult: Swift.Result<[FirestoreDao.FetchResponse<Delegate.Model>], FirestoreDaoFetchError>) {
+        delegate?.firestoreDao(prefixSearchingResult: prefixSearchingResult)
     }
 
     public func firestoreDao(batchWritingResult: Swift.Result<Void, FirestoreDaoWriteError>) {
         delegate?.firestoreDao(batchWritingResult: batchWritingResult)
-    }
-
-    public func firestoreDao(prefixSearchingResult: Swift.Result<[Delegate.Model], FirestoreDaoFetchError>) {
-        delegate?.firestoreDao(prefixSearchingResult: prefixSearchingResult)
     }
 }

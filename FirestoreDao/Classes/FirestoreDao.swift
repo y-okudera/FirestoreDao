@@ -25,6 +25,16 @@ public final class FirestoreDao {
             self.operationType = operationType
         }
     }
+
+    public struct FetchResponse<Model: FirestoreModel> {
+        public let model: Model
+        public let snapshot: DocumentSnapshot
+
+        public init(model: Model, snapshot: DocumentSnapshot) {
+            self.model = model
+            self.snapshot = snapshot
+        }
+    }
 }
 
 // MARK: - Access a specific document.
@@ -64,17 +74,21 @@ public extension FirestoreDao {
     /// - Parameters:
     ///   - documentPath: A unique path for the document.
     ///   - completionHandler: completion handler
-    static func fetchDocument<Model: FirestoreModel>(documentPath: String, completionHandler: @escaping (Result<Model, FirestoreDaoFetchError>) -> Void) {
+    static func fetchDocument<Model: FirestoreModel>(documentPath: String, completionHandler: @escaping (Result<FetchResponse<Model>, FirestoreDaoFetchError>) -> Void) {
         Firestore.firestore().collection(Model.collectionPath).document(documentPath).getDocument { snapshot, error in
             if let error = error {
                 completionHandler(.failure(.detail(error)))
                 return
             }
-            guard let snapshotData = snapshot?.data() else {
+            guard let snapshot = snapshot else {
                 completionHandler(.failure(.snapshotDataNotFound))
                 return
             }
-            let model = Model(documentPath: documentPath, data: snapshotData)
+            guard let snapshotData = snapshot.data() else {
+                completionHandler(.failure(.snapshotDataNotFound))
+                return
+            }
+            let model = FetchResponse<Model>(model: .init(documentPath: documentPath, data: snapshotData), snapshot: snapshot)
             completionHandler(.success(model))
         }
     }
@@ -100,7 +114,7 @@ public extension FirestoreDao {
     /// Fetch all documents.
     /// - Parameters:
     ///   - completionHandler: completion handler
-    static func fetchAllDocuments<Model: FirestoreModel>(completionHandler: @escaping (Result<[Model], FirestoreDaoFetchError>) -> Void) {
+    static func fetchAllDocuments<Model: FirestoreModel>(completionHandler: @escaping (Result<[FetchResponse<Model>], FirestoreDaoFetchError>) -> Void) {
         Firestore.firestore().collection(Model.collectionPath).getDocuments { snapshot, error in
             if let error = error {
                 completionHandler(.failure(.detail(error)))
@@ -110,8 +124,8 @@ public extension FirestoreDao {
                 completionHandler(.failure(.snapshotDataNotFound))
                 return
             }
-            let models = snapshot.documents.map { Model(documentPath: $0.documentID, data: $0.data()) }
-            completionHandler(.success(models))
+            let response = snapshot.documents.map { FetchResponse<Model>(model: .init(documentPath: $0.documentID, data: $0.data()), snapshot: $0) }
+            completionHandler(.success(response))
         }
     }
 
@@ -119,7 +133,7 @@ public extension FirestoreDao {
     /// - Parameters:
     ///   - completionHandler: completion handler
     static func fetchDocuments<Model: FirestoreModel>(query: (FirestoreDaoQueryManager<Model>) -> Query = { $0.query },
-                                                      completionHandler: @escaping (Result<[Model], FirestoreDaoFetchError>) -> Void) {
+                                                      completionHandler: @escaping (Result<[FetchResponse<Model>], FirestoreDaoFetchError>) -> Void) {
         let collectionReference = Firestore.firestore().collection(Model.collectionPath)
         let manager = FirestoreDaoQueryManager<Model>(query: collectionReference)
         query(manager).getDocuments { snapshot, error in
@@ -131,8 +145,8 @@ public extension FirestoreDao {
                 completionHandler(.failure(.snapshotDataNotFound))
                 return
             }
-            let models = snapshot.documents.map { Model(documentPath: $0.documentID, data: $0.data()) }
-            completionHandler(.success(models))
+            let response = snapshot.documents.map { FetchResponse<Model>(model: .init(documentPath: $0.documentID, data: $0.data()), snapshot: $0) }
+            completionHandler(.success(response))
         }
     }
 
@@ -145,7 +159,7 @@ public extension FirestoreDao {
     static func searchDocumentsByPrefixMatch<Model: FirestoreModel>(field: Model.Keys,
                                                                     searchWord: String,
                                                                     limit: Int?,
-                                                                    completionHandler: @escaping (Result<[Model], FirestoreDaoFetchError>) -> Void) {
+                                                                    completionHandler: @escaping (Result<[FetchResponse<Model>], FirestoreDaoFetchError>) -> Void) {
         self.fetchDocuments(query: { queryManager -> Query in
             queryManager.order(by: field, descending: false)
             queryManager.start(at: [searchWord])
