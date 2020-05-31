@@ -1,5 +1,5 @@
 //
-//  FirestoreDao.swift
+//  FirestoreDataAccess.swift
 //  FirestoreDao
 //
 //  Created by okudera on 2020/05/25.
@@ -8,7 +8,7 @@
 
 import FirebaseFirestore
 
-public final class FirestoreDao {
+public final class FirestoreDataAccess {
 
     // MARK: - Access a specific document.
 
@@ -16,7 +16,7 @@ public final class FirestoreDao {
     /// - Parameters:
     ///   - model: The structure to register.
     ///   - completionHandler: completion handler
-    public static func createDocument<Model: FirestoreModel>(model: Model, completionHandler: @escaping (Result<Void, WriteError>) -> Void) {
+    public static func createDocument<Model: FirestoreModel>(model: Model, completionHandler: @escaping (FDResult<Void, FDWriteError>) -> Void) {
         let document = Firestore.firestore().collection(Model.collectionPath).document(model.documentPath)
         document.setData(model.initialDictionary) { error in
             if let error = error {
@@ -31,7 +31,7 @@ public final class FirestoreDao {
     /// - Parameters:
     ///   - model: The structure to update.
     ///   - completionHandler: completion handler
-    public static func updateDocument<Model: FirestoreModel>(model: Model, completionHandler: @escaping (Result<Void, WriteError>) -> Void) {
+    public static func updateDocument<Model: FirestoreModel>(model: Model, completionHandler: @escaping (FDResult<Void, FDWriteError>) -> Void) {
         let document = Firestore.firestore().collection(Model.collectionPath).document(model.documentPath)
         document.updateData(model.updateDictionary) { error in
             if let error = error {
@@ -46,7 +46,7 @@ public final class FirestoreDao {
     /// - Parameters:
     ///   - documentPath: A unique path for the document.
     ///   - completionHandler: completion handler
-    public static func fetchDocument<Model: FirestoreModel>(documentPath: String, completionHandler: @escaping (Result<FetchResponse<Model>, FetchError>) -> Void) {
+    public static func fetchDocument<Model: FirestoreModel>(documentPath: String, completionHandler: @escaping (FDResult<FetchResponse<Model>, FDFetchError>) -> Void) {
         Firestore.firestore().collection(Model.collectionPath).document(documentPath).getDocument { snapshot, error in
             if let error = error {
                 completionHandler(.failure(.detail(error)))
@@ -69,7 +69,7 @@ public final class FirestoreDao {
     /// - Parameters:
     ///   - documentPath: A unique path for the document.
     ///   - completionHandler: completion handler
-    public static func deleteDocument<Model: FirestoreModel>(modelType: Model.Type, documentPath: String, completionHandler: @escaping (Result<Void, WriteError>) -> Void) {
+    public static func deleteDocument<Model: FirestoreModel>(modelType: Model.Type, documentPath: String, completionHandler: @escaping (FDResult<Void, FDWriteError>) -> Void) {
         let document = Firestore.firestore().collection(Model.collectionPath).document(documentPath)
         document.delete { error in
             if let error = error {
@@ -82,13 +82,12 @@ public final class FirestoreDao {
 }
 
 // MARK: - Access multiple documents.
-
-public extension FirestoreDao {
+public extension FirestoreDataAccess {
 
     /// Fetch all documents.
     /// - Parameters:
     ///   - completionHandler: completion handler
-    static func fetchAllDocuments<Model: FirestoreModel>(completionHandler: @escaping (Result<[FetchResponse<Model>], FetchError>) -> Void) {
+    static func fetchAllDocuments<Model: FirestoreModel>(completionHandler: @escaping (FDResult<[FetchResponse<Model>], FDFetchError>) -> Void) {
         Firestore.firestore().collection(Model.collectionPath).getDocuments { snapshot, error in
             if let error = error {
                 completionHandler(.failure(.detail(error)))
@@ -106,10 +105,10 @@ public extension FirestoreDao {
     /// Fetch multiple documents.
     /// - Parameters:
     ///   - completionHandler: completion handler
-    static func fetchDocuments<Model: FirestoreModel>(query: (FirestoreDaoQueryManager<Model>) -> Query = { $0.query },
-                                                      completionHandler: @escaping (Result<[FetchResponse<Model>], FetchError>) -> Void) {
+    static func fetchDocuments<Model: FirestoreModel>(query: (QueryManager<Model>) -> Query = { $0.query },
+                                                      completionHandler: @escaping (FDResult<[FetchResponse<Model>], FDFetchError>) -> Void) {
         let collectionReference = Firestore.firestore().collection(Model.collectionPath)
-        let manager = FirestoreDaoQueryManager<Model>(query: collectionReference)
+        let manager = QueryManager<Model>(query: collectionReference)
         query(manager).getDocuments { snapshot, error in
             if let error = error {
                 completionHandler(.failure(.detail(error)))
@@ -133,7 +132,7 @@ public extension FirestoreDao {
     static func searchDocumentsByPrefixMatch<Model: FirestoreModel>(field: Model.Keys,
                                                                     searchWord: String,
                                                                     limit: Int?,
-                                                                    completionHandler: @escaping (Result<[FetchResponse<Model>], FetchError>) -> Void) {
+                                                                    completionHandler: @escaping (FDResult<[FetchResponse<Model>], FDFetchError>) -> Void) {
         self.fetchDocuments(query: { queryManager -> Query in
             queryManager.order(by: field, descending: false)
             queryManager.start(at: [searchWord])
@@ -148,7 +147,7 @@ public extension FirestoreDao {
     }
 }
 
-public extension FirestoreDao {
+public extension FirestoreDataAccess {
 
     /// A set of write operations on one or more documents.
     /// - Parameters:
@@ -157,7 +156,7 @@ public extension FirestoreDao {
     ///
     /// - Note: Batch of writes can write to a maximum of 500 documents. For additional limits related to writes,
     /// see [Quotas and Limits](https://firebase.google.com/docs/firestore/quotas#writes_and_transactions).
-    static func batch<Model: FirestoreModel>(batchOperators: [BatchOperator<Model>], completionHandler: @escaping (Result<Void, WriteError>) -> Void) {
+    static func batch<Model: FirestoreModel>(batchOperators: [BatchOperator<Model>], completionHandler: @escaping (FDResult<Void, FDWriteError>) -> Void) {
         let batch = Firestore.firestore().batch()
 
         batchOperators.forEach {

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'FirestoreDao'
-  s.version          = '0.0.4'
+  s.version          = '0.0.5'
   s.summary          = 'FirebaseFirestore wrapper library.'
   s.description      = <<-DESC
 It is wrapper library for easy use of firestore.

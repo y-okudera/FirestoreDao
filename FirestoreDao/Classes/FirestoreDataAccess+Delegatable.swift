@@ -1,5 +1,5 @@
 //
-//  FirestoreDao+Delegatable.swift
+//  FirestoreDataAccess+Delegatable.swift
 //  FirestoreDao
 //
 //  Created by okudera on 2020/05/25.
@@ -8,23 +8,23 @@
 
 import FirebaseFirestore
 
-public extension FirestoreDao {
+public extension FirestoreDataAccess {
 
-    final class DelegatableDao<Delegate: FirestoreDaoDelegate> {
+    final class DelegatableDao<Delegate: FirestoreDataAccessDelegate> {
 
         /// Callback
         ///
         /// - Note: Weak is not required here because the delegate instance is weak in AnyFirestoreDaoDelegate.
-        public var delegate: AnyFirestoreDaoDelegate<Delegate>
+        public var delegate: AnyFirestoreDataAccessDelegate<Delegate>
 
-        public init(delegate: AnyFirestoreDaoDelegate<Delegate>) {
+        public init(delegate: AnyFirestoreDataAccessDelegate<Delegate>) {
             self.delegate = delegate
         }
     }
 }
 
 // MARK: - Access a specific document.
-public extension FirestoreDao.DelegatableDao {
+public extension FirestoreDataAccess.DelegatableDao {
 
     /// Create a new document.
     /// - Parameters:
@@ -102,7 +102,7 @@ public extension FirestoreDao.DelegatableDao {
     }
 }
 
-public extension FirestoreDao.DelegatableDao {
+public extension FirestoreDataAccess.DelegatableDao {
 
     /// Fetch all documents.
     func fetchAllDocuments() {
@@ -124,9 +124,9 @@ public extension FirestoreDao.DelegatableDao {
     }
 
     /// Fetch multiple documents.
-    func fetchDocuments(query: (FirestoreDaoQueryManager<Delegate.Model>) -> Query = { $0.query }) {
+    func fetchDocuments(query: (QueryManager<Delegate.Model>) -> Query = { $0.query }) {
         let collectionReference = Firestore.firestore().collection(Delegate.Model.collectionPath)
-        let manager = FirestoreDaoQueryManager<Delegate.Model>(query: collectionReference)
+        let manager = QueryManager<Delegate.Model>(query: collectionReference)
         query(manager).getDocuments { [weak self] snapshot, error in
             guard let `self` = self else {
                 return
@@ -152,7 +152,7 @@ public extension FirestoreDao.DelegatableDao {
     func searchDocumentsByPrefixMatch(field: Delegate.Model.Keys, searchWord: String, limit: Int?) {
 
         let collectionReference = Firestore.firestore().collection(Delegate.Model.collectionPath)
-        let manager = FirestoreDaoQueryManager<Delegate.Model>(query: collectionReference)
+        let manager = QueryManager<Delegate.Model>(query: collectionReference)
         manager.order(by: field, descending: false)
         manager.start(at: [searchWord])
         manager.end(at: [searchWord + "\u{f8ff}"])
@@ -178,7 +178,7 @@ public extension FirestoreDao.DelegatableDao {
 }
 
 // MARK: - Access multiple documents.
-public extension FirestoreDao.DelegatableDao {
+public extension FirestoreDataAccess.DelegatableDao {
 
     /// A set of write operations on one or more documents.
     /// - Parameter batchOperators: Array of structures with data model and operation type.
