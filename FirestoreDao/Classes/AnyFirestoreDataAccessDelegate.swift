@@ -1,5 +1,5 @@
 //
-//  AnyFirestoreDaoDelegate.swift
+//  AnyFirestoreDataAccessDelegate.swift
 //  FirestoreDao
 //
 //  Created by okudera on 2020/05/25.
@@ -7,7 +7,7 @@
 //
 
 /// Type Erasure
-public final class AnyFirestoreDaoDelegate<Delegate: FirestoreDaoDelegate> {
+public final class AnyFirestoreDataAccessDelegate<Delegate: FirestoreDataAccessDelegate> {
 
     private weak var delegate: Delegate?
 
@@ -17,37 +17,37 @@ public final class AnyFirestoreDaoDelegate<Delegate: FirestoreDaoDelegate> {
 
     // Access a specific document.
 
-    public func firestoreDao(creationResult: Swift.Result<Void, WriteError>) {
+    public func firestoreDao(creationResult: FDResult<Void, FDWriteError>) {
         delegate?.firestoreDao(creationResult: creationResult)
     }
 
-    public func firestoreDao(updatingResult: Swift.Result<Void, WriteError>) {
+    public func firestoreDao(updatingResult: FDResult<Void, FDWriteError>) {
         delegate?.firestoreDao(updatingResult: updatingResult)
     }
 
-    public func firestoreDao(fetchingResult: Swift.Result<FetchResponse<Delegate.Model>, FetchError>) {
+    public func firestoreDao(fetchingResult: FDResult<FetchResponse<Delegate.Model>, FDFetchError>) {
         delegate?.firestoreDao(fetchingResult: fetchingResult)
     }
 
-    public func firestoreDao(deletionResult: Swift.Result<Void, WriteError>) {
+    public func firestoreDao(deletionResult: FDResult<Void, FDWriteError>) {
         delegate?.firestoreDao(deletionResult: deletionResult)
     }
 
     // Access multiple documents.
 
-    public func firestoreDao(allDocumentsFetchingResult: Swift.Result<[FetchResponse<Delegate.Model>], FetchError>) {
+    public func firestoreDao(allDocumentsFetchingResult: FDResult<[FetchResponse<Delegate.Model>], FDFetchError>) {
         delegate?.firestoreDao(allDocumentsFetchingResult: allDocumentsFetchingResult)
     }
 
-    public func firestoreDao(documentsFetchingResult: Swift.Result<[FetchResponse<Delegate.Model>], FetchError>) {
+    public func firestoreDao(documentsFetchingResult: FDResult<[FetchResponse<Delegate.Model>], FDFetchError>) {
         delegate?.firestoreDao(documentsFetchingResult: documentsFetchingResult)
     }
 
-    public func firestoreDao(prefixSearchingResult: Swift.Result<[FetchResponse<Delegate.Model>], FetchError>) {
+    public func firestoreDao(prefixSearchingResult: FDResult<[FetchResponse<Delegate.Model>], FDFetchError>) {
         delegate?.firestoreDao(prefixSearchingResult: prefixSearchingResult)
     }
 
-    public func firestoreDao(batchWritingResult: Swift.Result<Void, WriteError>) {
+    public func firestoreDao(batchWritingResult: FDResult<Void, FDWriteError>) {
         delegate?.firestoreDao(batchWritingResult: batchWritingResult)
     }
 }

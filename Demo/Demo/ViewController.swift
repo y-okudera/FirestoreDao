@@ -12,8 +12,8 @@ import UIKit
 
 final class ViewController: UIViewController {
 
-    lazy var fruitDao: FirestoreDao.DelegatableDao<ViewController> = {
-        return .init(delegate: AnyFirestoreDaoDelegate(delegate: self))
+    lazy var fruitDao: FirestoreDataAccess.DelegatableDao<ViewController> = {
+        return .init(delegate: AnyFirestoreDataAccessDelegate(delegate: self))
     }()
 
     override func viewDidLoad() {
@@ -31,7 +31,7 @@ final class ViewController: UIViewController {
         fruitDao.createDocument(model: .init(uid: "510", name: "avocado"))
 
         // Use closure
-//        FirestoreDao.createDocument(model: Fruit(uid: "1000", name: "Muscat")) { result in
+//        FirestoreDataAccess.createDocument(model: Fruit(uid: "1000", name: "Muscat")) { result in
 //            switch result {
 //            case .success:
 //                print("データ登録に成功しました")
@@ -46,7 +46,7 @@ final class ViewController: UIViewController {
         fruitDao.fetchDocument(documentPath: "100")
 
         // Use closure
-//        FirestoreDao.fetchDocument(documentPath: "200") { (result: Swift.Result<FetchResponse<Fruit>, FetchError>) in
+//        FirestoreDataAccess.fetchDocument(documentPath: "200") { (result: FDResult<FetchResponse<Fruit>, FDFetchError>) in
 //            switch result {
 //            case .success(let response):
 //                print("Fetched data: \(response)")
@@ -56,7 +56,7 @@ final class ViewController: UIViewController {
 //                                         content: "updated!",
 //                                         iconImageUrl: URL(string: "https://via.placeholder.com/200x100"),
 //                                         backImageUrl: URL(string: "https://via.placeholder.com/300.png/09f/fff"))
-//                FirestoreDao.updateDocument(model: updatedFruit) { result in
+//                FirestoreDataAccess.updateDocument(model: updatedFruit) { result in
 //                    switch result {
 //                    case .success:
 //                        print("Update succeeded.")
@@ -75,7 +75,7 @@ final class ViewController: UIViewController {
         fruitDao.deleteDocument(documentPath: "200")
 
         // Use closure
-//        FirestoreDao.deleteDocument(modelType: Fruit.self, documentPath: "200") { result in
+//        FirestoreDataAccess.deleteDocument(modelType: Fruit.self, documentPath: "200") { result in
 //            switch result {
 //            case .success:
 //                print("Delete succeeded.")
@@ -90,7 +90,7 @@ final class ViewController: UIViewController {
         fruitDao.fetchAllDocuments()
 
         // Use closure
-//        FirestoreDao.fetchAllDocuments { (result: Swift.Result<[FetchResponse<Fruit>], FetchError>) in
+//        FirestoreDataAccess.fetchAllDocuments { (result: FDResult<[FetchResponse<Fruit>], FDFetchError>) in
 //            switch result {
 //            case .success(let response):
 //                print("All data fetching succeeded. Count is \(response.count) :\(response)")
@@ -109,12 +109,12 @@ final class ViewController: UIViewController {
         }
 
         // Use closure
-//        FirestoreDao.fetchDocuments(query: { queryManager -> Query in
+//        FirestoreDataAccess.fetchDocuments(query: { queryManager -> Query in
 //            queryManager.where(field: .fruitID, isGreaterThanOrEqualTo: "300")
 //            queryManager.limit(to: 2)
 //            return queryManager.query
 //
-//        }, completionHandler: { (result: Swift.Result<[FetchResponse<Fruit>], FetchError>) in
+//        }, completionHandler: { (result: FDResult<[FetchResponse<Fruit>], FDFetchError>) in
 //            switch result {
 //            case .success(let response):
 //                print("Multiple data fetching succeeded. Count is \(response.count) :\(response)")
@@ -129,7 +129,7 @@ final class ViewController: UIViewController {
 //                batchOperators.append(.init(model: .init(uid: "600", name: "Banana"), operationType: .set))
 //
 //                // Batch writing(update and create)
-//                FirestoreDao.batch(batchOperators: batchOperators) { result in
+//                FirestoreDataAccess.batch(batchOperators: batchOperators) { result in
 //                    switch result {
 //                    case .success:
 //                        print("Batch writing succeeded.")
@@ -149,7 +149,7 @@ final class ViewController: UIViewController {
         fruitDao.searchDocumentsByPrefixMatch(field: .name, searchWord: "G", limit: nil)
 
         // Use closure
-//        FirestoreDao.searchDocumentsByPrefixMatch(field: .name, searchWord: "G", limit: nil) { (result: Swift.Result<[FetchResponse<Fruit>], FetchError>) in
+//        FirestoreDataAccess.searchDocumentsByPrefixMatch(field: .name, searchWord: "G", limit: nil) { (result: FDResult<[FetchResponse<Fruit>], FDFetchError>) in
 //            switch result {
 //            case .success(let response):
 //                print("Prefix searching succeeded. Count is \(response.count) :\(response)")
@@ -160,11 +160,11 @@ final class ViewController: UIViewController {
     }
 }
 
-extension ViewController: FirestoreDaoDelegate {
+extension ViewController: FirestoreDataAccessDelegate {
 
     typealias Model = Fruit
 
-    func firestoreDao(creationResult: Swift.Result<Void, WriteError>) {
+    func firestoreDao(creationResult: FDResult<Void, FDWriteError>) {
         switch creationResult {
         case .success:
             print("Create succeeded.")
@@ -174,7 +174,7 @@ extension ViewController: FirestoreDaoDelegate {
         }
     }
 
-    func firestoreDao(updatingResult: Swift.Result<Void, WriteError>) {
+    func firestoreDao(updatingResult: FDResult<Void, FDWriteError>) {
         switch updatingResult {
         case .success:
             print("Update succeeded.")
@@ -184,7 +184,7 @@ extension ViewController: FirestoreDaoDelegate {
         }
     }
 
-    func firestoreDao(fetchingResult: Swift.Result<FetchResponse<Fruit>, FetchError>) {
+    func firestoreDao(fetchingResult: FDResult<FetchResponse<Fruit>, FDFetchError>) {
         switch fetchingResult {
         case .success(let response):
             print("Fetch succeeded: \(response.model)")
@@ -202,7 +202,7 @@ extension ViewController: FirestoreDaoDelegate {
         }
     }
 
-    func firestoreDao(deletionResult: Swift.Result<Void, WriteError>) {
+    func firestoreDao(deletionResult: FDResult<Void, FDWriteError>) {
         switch deletionResult {
         case .success:
             print("Delete succeeded.")
@@ -212,7 +212,7 @@ extension ViewController: FirestoreDaoDelegate {
         }
     }
 
-    func firestoreDao(allDocumentsFetchingResult: Result<[FetchResponse<Fruit>], FetchError>) {
+    func firestoreDao(allDocumentsFetchingResult: FDResult<[FetchResponse<Fruit>], FDFetchError>) {
         switch allDocumentsFetchingResult {
         case .success(let response):
             print("All data fetching succeeded. Count is \(response.count) :\(response)")
@@ -222,7 +222,7 @@ extension ViewController: FirestoreDaoDelegate {
         }
     }
 
-    func firestoreDao(documentsFetchingResult: Result<[FetchResponse<Fruit>], FetchError>) {
+    func firestoreDao(documentsFetchingResult: FDResult<[FetchResponse<Fruit>], FDFetchError>) {
         switch documentsFetchingResult {
         case .success(let response):
             print("Multiple data fetching succeeded. Count is \(response.count) :\(response)")
@@ -243,7 +243,7 @@ extension ViewController: FirestoreDaoDelegate {
         }
     }
 
-    func firestoreDao(prefixSearchingResult: Result<[FetchResponse<Fruit>], FetchError>) {
+    func firestoreDao(prefixSearchingResult: FDResult<[FetchResponse<Fruit>], FDFetchError>) {
         switch prefixSearchingResult {
         case .success(let response):
             print("Prefix searching succeeded. Count is \(response.count) :\(response)")
@@ -252,7 +252,7 @@ extension ViewController: FirestoreDaoDelegate {
         }
     }
 
-    func firestoreDao(batchWritingResult: Result<Void, WriteError>) {
+    func firestoreDao(batchWritingResult: FDResult<Void, FDWriteError>) {
         switch batchWritingResult {
         case .success:
             print("Batch writing succeeded.")

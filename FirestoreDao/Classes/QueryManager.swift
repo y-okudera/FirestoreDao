@@ -1,5 +1,5 @@
 //
-//  FirestoreDaoQueryManager.swift
+//  QueryManager.swift
 //  FirestoreDao
 //
 //  Created by okudera on 2020/05/25.
@@ -8,7 +8,7 @@
 
 import FirebaseFirestore
 
-public final class FirestoreDaoQueryManager<M: FirestoreModel> {
+public final class QueryManager<M: FirestoreModel> {
 
     public var query: Query
 
@@ -18,7 +18,7 @@ public final class FirestoreDaoQueryManager<M: FirestoreModel> {
 }
 
 // MARK: - Filtering Data
-public extension FirestoreDaoQueryManager {
+public extension QueryManager {
     /// `== value`
     func `where`(field: M.Keys, isEqualTo value: Any) {
         self.query = self.query.whereField(field.key, isEqualTo: value)
@@ -56,7 +56,7 @@ public extension FirestoreDaoQueryManager {
 }
 
 // MARK: - Filtering Data
-public extension FirestoreDaoQueryManager {
+public extension QueryManager {
     /// The first matching documents up to the specified number.
     func limit(to limit: Int) {
         self.query = self.query.limit(to: limit)
@@ -69,7 +69,7 @@ public extension FirestoreDaoQueryManager {
 }
 
 // MARK: - Sorting data
-public extension FirestoreDaoQueryManager {
+public extension QueryManager {
     /// Sorted by the specified field.
     func order(by field: M.Keys, descending: Bool) {
         self.query = self.query.order(by: field.key, descending: descending)
@@ -77,7 +77,7 @@ public extension FirestoreDaoQueryManager {
 }
 
 // MARK: - Choosing StartPoints
-public extension FirestoreDaoQueryManager {
+public extension QueryManager {
     /// Starts at the provided document (inclusive).
     /// The starting position is relative to the order of the query.
     /// The document must contain all of the fields provided in the orderBy of this query.
